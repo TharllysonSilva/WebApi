@@ -2,19 +2,19 @@ import 'package:http/http.dart' as http;
 
 class JournalService {
   static const String url = "http://192.168.1.6:3000/";
-  static const String resource = "learnhttp";
+  static const String resource = "learnhttp/";
 
-  String getUrl() {
+  String getURL() {
     return "$url$resource";
   }
 
-  register(String content) {
-    http.post(Uri.parse(getUrl()), body: {"content": content});
+  //TODO: Substituir getURL por getURI
+  void register(String content) {
+    http.post(Uri.parse(getURL()), body: {'content': content});
   }
 
-  Future<String> get() async {
-    http.Response response = await http.get(Uri.parse(getUrl()));
-    print(response);
-    return response.body;
+  void get() async {
+    http.Response response = await http.get(Uri.parse(getURL()));
+    print(response.body);
   }
 }
