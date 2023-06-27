@@ -8,7 +8,6 @@ class JournalService {
     return "$url$resource";
   }
 
-  //TODO: Substituir getURL por getURI
   void register(String content) {
     http.post(Uri.parse(getURL()), body: {'content': content});
   }
