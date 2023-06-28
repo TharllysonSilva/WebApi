@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
         ),
         textTheme: GoogleFonts.bitterTextTheme(),
       ),
-      initialRoute: "add-journal",
+      initialRoute: "home",
       routes: {
         "home": (context) => const HomeScreen(),
         "add-journal": (context) => AddJournalScreen(
