@@ -28,6 +28,7 @@ class MyApp extends StatelessWidget {
           elevation: 0,
           backgroundColor: Colors.black,
           titleTextStyle: TextStyle(color: Colors.white),
+          actionsIconTheme: IconThemeData(color: Colors.white),
         ),
         textTheme: GoogleFonts.bitterTextTheme(),
       ),
@@ -35,11 +36,12 @@ class MyApp extends StatelessWidget {
       routes: {
         "home": (context) => const HomeScreen(),
         "add-journal": (context) => AddJournalScreen(
-            journal: Journal(
-                id: "id",
-                content: "content",
-                createdAt: DateTime.now(),
-                updatedAt: DateTime.now())),
+              journal: Journal(
+                  id: "id",
+                  content: "content",
+                  createdAt: DateTime.now(),
+                  updatedAt: DateTime.now()),
+            ),
       },
     );
   }
