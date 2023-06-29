@@ -1,6 +1,6 @@
-# flutter_webapi_first_course
+# flutter_webapi_second_course
 
-Projeto do primeiro curso de WebAPI da Formação Flutter
+Aplicação para o segundo curso de WebAPI da Formação Flutter da Alura
 
 ## Getting Started
 
