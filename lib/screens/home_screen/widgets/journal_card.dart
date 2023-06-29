@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_webapi_first_course/helpers/weekday.dart';
-import 'package:flutter_webapi_first_course/models/journal.dart';
-import 'package:flutter_webapi_first_course/screens/add_journal_screen/add_journal_screen.dart';
+import 'package:flutter_webapi_second_course/screens/commom/confirmation_dialog.dart';
+import 'package:flutter_webapi_second_course/services/journal_service.dart';
 import 'package:uuid/uuid.dart';
+import '../../../helpers/weekday.dart';
+import '../../../models/journal.dart';
+import '../../add_journal_screen/add_journal_screen.dart';
 
 class JournalCard extends StatelessWidget {
   final Journal? journal;
@@ -20,7 +22,7 @@ class JournalCard extends StatelessWidget {
     if (journal != null) {
       return InkWell(
         onTap: () {
-          //TODO: Implementar edição da entrada
+          callAddJournalScreen(context, journal: journal);
         },
         child: Container(
           height: 115,
@@ -82,6 +84,15 @@ class JournalCard extends StatelessWidget {
                   ),
                 ),
               ),
+              IconButton(
+                onPressed: () {
+                  deleteJournal(context);
+                },
+                icon: const Icon(
+                  Icons.delete,
+                  color: Colors.grey,
+                ),
+              ),
             ],
           ),
         ),
@@ -104,16 +115,26 @@ class JournalCard extends StatelessWidget {
     }
   }
 
-  callAddJournalScreen(BuildContext context) {
-    Navigator.pushNamed(
-      context,
-      'add-journal',
-      arguments: Journal(
+  callAddJournalScreen(BuildContext context, {Journal? journal}) {
+    Journal internalJournal = Journal(
         id: const Uuid().v1(),
         content: "",
         createdAt: showedDate,
-        updatedAt: showedDate,
-      ),
+        updatedAt: showedDate);
+
+    if (journal != null) {
+      internalJournal = journal;
+    }
+
+    Map<String, dynamic> map = {
+      'journal': internalJournal,
+      'is_editing': journal != null
+    };
+
+    Navigator.pushNamed(
+      context,
+      'add-journal',
+      arguments: map,
     ).then((value) {
       refreshFunction();
 
@@ -129,6 +150,30 @@ class JournalCard extends StatelessWidget {
             content: Text("Houve uma falha ao registar."),
           ),
         );
+      }
+    });
+  }
+
+  //Confirmação para executar a exclusão
+  deleteJournal(BuildContext context) {
+    showConfirmationDialog(
+      context,
+      content:
+          "Deseja realmente remover o registro de ${WeekDay(journal!.createdAt)}?",
+      affirmativeOption: "Remover",
+    ).then((value) {
+      if (value != null && value) {
+        JournalService service = JournalService();
+        if (journal != null) {
+          service.remove(journal!.id).then((value) {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text((value)
+                    ? "Removido com sucesso!"
+                    : "Houve um erro ao remover")));
+          }).then((value) {
+            refreshFunction();
+          });
+        }
       }
     });
   }
