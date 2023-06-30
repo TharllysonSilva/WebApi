@@ -1,18 +1,31 @@
 {
-  "user" : [],
   "learnhttp": {},
+  "users": [
+    {
+      "email": "ricarth2@gmail.com",
+      "password": "$2a$10$SmIRIg5fWr6Rjt..PgbS4u1LmJe42NTxLdDoQsDZpv49/e.DFvxjG",
+      "id": 1
+    },
+    {
+      "email": "ricarth3@gmail.com",
+      "password": "$2a$10$M.OlicU/dDtZdxIh3FmpBem/udUU/S/s98GoR6BLnNWAdOMtq1KzS",
+      "id": 2
+    }
+  ],
   "journals": [
     {
       "id": "d89b16b0-11ec-11ed-ab63-23f5b0767df8",
       "content": "Here we stand,\nWorlds apart, hearts broken in two, two, two",
       "created_at": "2022-07-31 22:40:59.265790",
-      "updated_at": "2022-07-31 22:40:59.265790"
+      "updated_at": "2022-07-31 22:40:59.265790",
+      "userId": 2
     },
     {
       "id": "ce68e1f0-12a4-11ed-b302-5b86fc6e32a5",
       "content": "And she never wanted to leave",
       "created_at": "2022-07-30 20:15:11.127928",
-      "updated_at": "2022-07-30 20:15:11.127928"
+      "updated_at": "2022-07-30 20:15:11.127928",
+      "userId": 1
     }
   ]
 }
