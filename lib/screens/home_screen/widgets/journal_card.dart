@@ -154,7 +154,6 @@ class JournalCard extends StatelessWidget {
     });
   }
 
-  //Confirmação para executar a exclusão
   deleteJournal(BuildContext context) {
     showConfirmationDialog(
       context,
