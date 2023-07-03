@@ -9,7 +9,7 @@ import 'http_interceptors.dart';
 
 class AuthService {
   //TODO: Modularizar essa URL para todos os services.
-  static const String url = "http://192.168.1.6:3000/";
+  static const String url = "http://192.168.1.112:3000/";
 
   //TODO: Criar recursos para o próprio service
 
