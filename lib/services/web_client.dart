@@ -4,7 +4,7 @@ import 'http_interceptors.dart';
 
 class WebClient {
   //TODO: Adicionar seu IP aqui, use "ipconfig" no Windows ou "ifconfig" no Linux.
-  static const String url = "http://SEU_IP_AQUI:3000/";
+  static const String url = "http://192.168.1.6:3000/";
 
   http.Client client = InterceptedClient.build(
     interceptors: [LoggingInterceptor()],
