@@ -1,7 +1,10 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_webapi_second_course/screens/commom/confirmation_dialog.dart';
+import 'package:flutter_webapi_second_course/screens/commom/exception_dialog.dart';
 import 'package:flutter_webapi_second_course/services/auth_service.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -70,13 +73,13 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  void tryLogin(BuildContext context) async {
+  void tryLogin(BuildContext context) {
     String email = _emailController.text;
     String password = _passwordController.text;
-    try {
-      String token = await authService.login(email, password);
+
+    authService.login(email, password).then((token) {
       Navigator.pushReplacementNamed(context, 'home');
-    } on UserNotFoundException {
+    }).catchError((e) {
       showConfirmationDialog(
         context,
         title: "Usuário ainda não existe",
@@ -85,12 +88,15 @@ class LoginScreen extends StatelessWidget {
       ).then(
         (value) async {
           if (value) {
-            //TODO: Tratar caso do usuário não existente
-            String token = await authService.register(email, password);
-            Navigator.pushReplacementNamed(context, 'home');
+            authService.register(email, password).then((token) {
+              Navigator.pushReplacementNamed(context, 'home');
+            });
           }
         },
       );
-    }
+    }, test: (e) => e is UserNotFoundException).catchError((e) {
+      HttpException exception = e as HttpException;
+      showExceptionDialog(context, content: exception.message);
+    }, test: (e) => e is HttpException);
   }
 }
