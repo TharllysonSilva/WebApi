@@ -1,6 +1,6 @@
 # flutter_webapi_second_course
 
-Aplicação para o segundo curso de WebAPI da Formação Flutter da Alura
+ Fazendo fluxo de logar e deslogar o usuário ou usuária, observando os erros mais comuns de acontecerem em Web APIs, bem como seus respectivos tratamentos possíveis de forma agradável.
 
 ## Getting Started
 
